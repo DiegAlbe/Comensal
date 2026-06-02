@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>COMENSAL — Nutrición, Oficio y Memoria</title>
+  <!-- Google Fonts + Font Awesome -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: #F9F6F0; /* Algodón Orgánico Crema */
+      color: #1A1A1A;
+      font-family: 'Inter', sans-serif;
+      line-height: 1.5;
+      scroll-behavior: smooth;
+    }
+
+    /* tipografías */
+    h1, h2, h3, .serif-title, .hero-title, .section-title, .card-title, .manifesto-quote {
+      font-family: 'Playfair Display', serif;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+    }
+
+    .italic-expressive {
+      font-style: italic;
+      font-weight: 500;
+    }
+
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* header + navegación */
+    .navbar {
+      padding: 24px 0;
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+    }
+
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .logo a {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      text-decoration: none;
+      color: #1A1A1A;
+      letter-spacing: -0.02em;
+    }
+    .logo span {
+      font-size: 0.9rem;
+      font-family: 'Inter', sans-serif;
+      font-weight: 400;
+      display: block;
+      color: #2C2C2C;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.2rem;
+      list-style: none;
+    }
+    .nav-links a {
+      text-decoration: none;
+      font-weight: 500;
+      color: #1A1A1A;
+      transition: opacity 0.2s;
+    }
+    .nav-links a:hover {
+      opacity: 0.7;
+    }
+
+    /* hamburguesa */
+    .hamburger {
+      display: none;
+      font-size: 1.8rem;
+      cursor: pointer;
+      background: none;
+      border: none;
+      color: #1A1A1A;
+    }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        position: fixed;
+        top: 80px;
+        left: -100%;
+        width: 80%;
+        height: calc(100vh - 80px);
+        background: #F9F6F0;
+        flex-direction: column;
+        padding: 2rem;
+        gap: 1.5rem;
+        transition: 0.3s;
+        box-shadow: 2px 0 12px rgba(0,0,0,0.05);
+        z-index: 99;
+      }
+      .nav-links.active {
+        left: 0;
+      }
+      .hamburger {
+        display: block;
+      }
+    }
+
+    /* botones base */
+    .btn {
+      display: inline-block;
+      padding: 12px 28px;
+      border-radius: 40px;
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.2s;
+      border: 1px solid transparent;
+      font-family: 'Inter', sans-serif;
+      cursor: pointer;
+      background: none;
+    }
+    .btn-primary {
+      background-color: #1A1A1A;
+      color: #F9F6F0;
+      border-color: #1A1A1A;
+    }
+    .btn-primary:hover {
+      background-color: #2C2C2C;
+    }
+    .btn-outline {
+      border-color: #1A1A1A;
+      color: #1A1A1A;
+    }
+    .btn-outline:hover {
+      background-color: #1A1A1A;
+      color: #F9F6F0;
+    }
+    .btn-wa {
+      background-color: #1A1A1A;
+      color: #F9F6F0;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .btn-wa:hover {
+      background-color: #2C2C2C;
+    }
+    .btn-email {
+      border: 1px solid #1A1A1A;
+      background: transparent;
+    }
+
+    /* secciones */
+    section {
+      padding: 80px 0;
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+    }
+    .hero {
+      padding: 60px 0 80px;
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 0.9fr;
+      gap: 48px;
+      align-items: center;
+    }
+    .hero-title {
+      font-size: 3.5rem;
+      line-height: 1.2;
+      margin-bottom: 24px;
+    }
+    .hero-sub {
+      font-size: 1.2rem;
+      margin-bottom: 32px;
+      color: #2C2C2C;
+    }
+    .illustration {
+      text-align: center;
+      font-size: 8rem;
+    }
+    /* tarjetas duales */
+    .dual-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      margin-top: 48px;
+    }
+    .card-dual {
+      background: rgba(0,0,0,0.02);
+      padding: 32px;
+      border: 1px solid rgba(0,0,0,0.08);
+      border-radius: 24px;
+    }
+    .badge-legal {
+      display: inline-block;
+      background: #E8E4DC;
+      padding: 6px 14px;
+      font-size: 0.75rem;
+      font-weight: 500;
+      border-radius: 40px;
+      margin: 16px 0;
+    }
+    .form-group {
+      margin-bottom: 16px;
+    }
+    .form-group input, .form-group textarea {
+      width: 100%;
+      padding: 12px;
+      background: transparent;
+      border: 1px solid #2C2C2C40;
+      font-family: 'Inter', sans-serif;
+      border-radius: 12px;
+    }
+    .vertical-list {
+      list-style: none;
+      margin: 24px 0;
+    }
+    .vertical-list li {
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .blog-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      margin: 48px 0;
+    }
+    .blog-card {
+      background: #FFFFFF20;
+      padding: 28px;
+      border-radius: 24px;
+      border: 1px solid #ddd6cc;
+    }
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background-color: rgba(0,0,0,0.8);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+    .modal-content {
+      background: #F9F6F0;
+      max-width: 700px;
+      width: 90%;
+      max-height: 85vh;
+      overflow-y: auto;
+      padding: 32px;
+      border-radius: 28px;
+      position: relative;
+    }
+    .close-modal {
+      position: absolute;
+      top: 20px; right: 24px;
+      font-size: 28px;
+      cursor: pointer;
+    }
+    .inbound-block {
+      background: #EBE7DE;
+      padding: 28px;
+      border-radius: 20px;
+      margin-top: 32px;
+      text-align: center;
+    }
+    .inbound-block .btn-group {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      margin-top: 20px;
+      flex-wrap: wrap;
+    }
+    .floating-wa {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      background: #F9F6F0;
+      border: 1px solid #1A1A1A;
+      border-radius: 60px;
+      padding: 12px 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: #1A1A1A;
+      font-weight: 500;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      z-index: 99;
+      transition: 0.2s;
+    }
+    .floating-wa:hover {
+      background: #1A1A1A;
+      color: #F9F6F0;
+    }
+    footer {
+      text-align: center;
+      padding: 48px 0;
+      font-size: 0.85rem;
+      color: #4a4a4a;
+    }
+    @media (max-width: 768px) {
+      .hero-grid, .dual-grid, .blog-cards {
+        grid-template-columns: 1fr;
+      }
+      .hero-title {
+        font-size: 2.3rem;
+      }
+      section {
+        padding: 60px 0;
+      }
+    }
+    .success-msg {
+      background: #d4edc9;
+      color: #1e4620;
+      padding: 12px;
+      border-radius: 12px;
+      margin-top: 16px;
+      text-align: center;
+    }
+    hr {
+      margin: 24px 0;
+      border-color: #ddd2c4;
+    }
+  </style>
+</head>
+<body>
+  <header class="navbar">
+    <div class="container nav-container">
+      <div class="logo">
+        <a href="#">COMENSAL</a>
+        <span>Nutrición, Oficio y Memoria</span>
+      </div>
+      <button class="hamburger" id="hamburgerBtn" aria-label="Menú"><i class="fas fa-bars"></i></button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#verticalA">Comunidad</a></li>
+        <li><a href="#verticalB">Clínica</a></li>
+        <li><a href="#blog">Bitácora</a></li>
+        <li><a href="#contacto-footer">Contacto</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <h1 class="hero-title italic-expressive">Otra forma de comer es otra forma de habitar el mundo.</h1>
+          <p class="hero-sub">Soberanía alimentaria, pedagogía crítica y acompañamiento sin mandatos.</p>
+          <a href="#seccion-dual" class="btn btn-primary">→ Explorar caminos</a>
+        </div>
+        <div class="illustration">
+          <i class="fas fa-seedling" style="font-size: 6rem; opacity: 0.7;"></i>
+          <svg width="120" height="120" viewBox="0 0 100 100" style="margin-top: 10px;"><path d="M50,20 L70,50 L50,80 L30,50 Z" fill="none" stroke="#1A1A1A" stroke-width="1.5"/><circle cx="50" cy="50" r="8" fill="none" stroke="#1A1A1A"/></svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN DUAL (El Nexo) -->
+    <section id="seccion-dual">
+      <div class="container">
+        <h2 class="section-title" style="font-size: 2.2rem;">Dos modos de volver a la comida</h2>
+        <div class="dual-grid">
+          <div class="card-dual">
+            <i class="fas fa-users" style="font-size: 2rem; margin-bottom: 16px; display: inline-block;"></i>
+            <h3>Educación Alimentaria Nutricional (EAN)</h3>
+            <p>Programas enmarcados en la Ley 27.642. Para escuelas, cooperativas y organizaciones.</p>
+            <div class="badge-legal">Alineado a Ley 27.642 – Etiquetado Frontal</div>
+            <a href="#verticalA" class="btn btn-outline" style="margin-top: 12px;">Conocer programas →</a>
+          </div>
+          <div class="card-dual">
+            <i class="fas fa-leaf" style="font-size: 2rem; margin-bottom: 16px;"></i>
+            <h3>Hablemos de comer</h3>
+            <p>Encuentros virtuales personalizados, mirada crítica y humana, anti-dieta.</p>
+            <a href="https://wa.me/5491112345678?text=Hola%2C%20quiero%20agendar%20un%20encuentro%20de%20%22Hablemos%20de%20comer%22" target="_blank" class="btn btn-wa" style="margin-top: 12px;"><i class="fab fa-whatsapp"></i> Empezar conversación →</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- VERTICAL A (Institucional + Formulario) -->
+    <section id="verticalA">
+      <div class="container">
+        <h2 style="font-size: 1.9rem;">Comunidad · Comensales del Futuro</h2>
+        <div style="display: flex; flex-wrap: wrap; gap: 40px; margin-top: 32px;">
+          <div style="flex:1">
+            <h3><i class="fas fa-school"></i> Comensales del Futuro</h3>
+            <p>Programa educativo para escuelas: talleres de lectura crítica de etiquetas, huerta y memoria alimentaria.</p>
+            <h3 style="margin-top: 24px;"><i class="fas fa-tag"></i> Laboratorio de Etiquetas</h3>
+            <p>Talleres prácticos bajo la Ley 27.642. Aprendé a interpretar el etiquetado frontal con enfoque de derechos.</p>
+            <div class="badge-legal">Ley 27.642 – Promoción de Alimentación Saludable</div>
+          </div>
+          <div style="flex:1">
+            <h3>Solicitar asesoría institucional</h3>
+            <form id="emailFormInstitucional">
+              <div class="form-group">
+                <input type="text" id="nombre" placeholder="Nombre completo" required>
+              </div>
+              <div class="form-group">
+                <input type="text" id="rol" placeholder="Rol / Organización" required>
+              </div>
+              <div class="form-group">
+                <input type="email" id="email" placeholder="Correo electrónico" required>
+              </div>
+              <div class="form-group">
+                <textarea rows="3" id="mensaje" placeholder="Cuéntanos tu interés..."></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary">Solicitar asesoría para mi institución</button>
+              <div id="formStatus" style="margin-top: 16px;"></div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- VERTICAL B (Clínica) -->
+    <section id="verticalB" style="background: rgba(0,0,0,0.01);">
+      <div class="container">
+        <h2 class="italic-expressive" style="font-size: 2rem;">Sin pesocentrismo, sin mandatos. Solo conversación crítica y acompañamiento real.</h2>
+        <ul class="vertical-list">
+          <li><i class="fas fa-brain"></i> Ansiedad por comida</li>
+          <li><i class="fas fa-heart"></i> Relación con la imagen corporal</li>
+          <li><i class="fas fa-hand-peace"></i> Autonomía alimentaria</li>
+        </ul>
+        <a href="https://wa.me/5491112345678?text=Hola%2C%20quiero%20agendar%20un%20encuentro%20de%20%22Hablemos%20de%20comer%22" target="_blank" class="btn btn-primary" style="background:#1A1A1A;"><i class="fab fa-whatsapp"></i> Iniciar acompañamiento →</a>
+      </div>
+    </section>
+
+    <!-- BITÁCORA (Blog con modales) -->
+    <section id="blog">
+      <div class="container">
+        <h2 class="section-title" style="font-size: 2rem;">Escritos de oficio y memoria</h2>
+        <div class="blog-cards">
+          <!-- Artículo 1 -->
+          <div class="blog-card">
+            <h3>Etiquetado frontal: la transparencia como gesto político</h3>
+            <p>Un análisis de la Ley 27.642 y su impacto en los hábitos populares...</p>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 16px;">
+              <span style="font-size: 0.8rem;">15 mayo 2025</span>
+              <button class="btn btn-outline" style="padding: 6px 18px;" onclick="abrirModal(1)">Leer más →</button>
+            </div>
+          </div>
+          <!-- Artículo 2 -->
+          <div class="blog-card">
+            <h3>Memoria alimentaria: recetas de abuelas y soberanía</h3>
+            <p>Rescatar el oficio tradicional como acto de resistencia cultural...</p>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 16px;">
+              <span style="font-size: 0.8rem;">2 abril 2025</span>
+              <button class="btn btn-outline" style="padding: 6px 18px;" onclick="abrirModal(2)">Leer más →</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CIERRE INSTITUCIONAL -->
+    <section id="contacto-footer">
+      <div class="container">
+        <div style="max-width: 700px; margin: 0 auto; text-align: center;">
+          <p class="italic-expressive" style="font-size: 1.6rem;">"Comer con conciencia es un acto de memoria colectiva"</p>
+          <p style="margin: 24px 0;">— Fundadora de COMENSAL</p>
+          <div style="border-top: 1px solid #DCD3C6; width: 80px; margin: 24px auto;"></div>
+          <p>El cambio en el plato empieza con preguntas. ¿Nos encontramos?</p>
+          <div style="display: flex; gap: 20px; justify-content: center; margin-top: 32px; flex-wrap: wrap;">
+            <a href="https://wa.me/5491112345678?text=Hola%2C%20tengo%20una%20consulta%20urgente%20sobre%20COMENSAL" target="_blank" class="btn btn-wa"><i class="fab fa-whatsapp"></i> WhatsApp: consulta urgente</a>
+            <a href="#verticalA" class="btn btn-outline"><i class="far fa-envelope"></i> Email: propuestas o convenios</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>COMENSAL — Nutrición, Oficio y Memoria · Soberanía alimentaria · 2025</p>
+    </div>
+  </footer>
+
+  <!-- Botón flotante WhatsApp -->
+  <a href="https://wa.me/5491112345678?text=Hola%2C%20tengo%20una%20consulta%20rápida%20sobre%20COMENSAL" target="_blank" class="floating-wa">
+    <i class="fab fa-whatsapp fa-lg"></i> <span>Consultas rápidas</span>
+  </a>
+
+  <!-- MODAL (artículos) + inbound block -->
+  <div id="modalArticulo" class="modal">
+    <div class="modal-content">
+      <span class="close-modal" onclick="cerrarModal()">&times;</span>
+      <div id="modalBody"></div>
+      <div class="inbound-block">
+        <p style="font-weight: 500;">"¿Querés revisar tus etiquetas con alguien que no juzga? Agendá 'Hablemos de comer'."</p>
+        <div class="btn-group">
+          <a href="https://wa.me/5491112345678?text=Hola%2C%20quiero%20seguir%20conversando%20sobre%20el%20artículo%20de%20COMENSAL" target="_blank" class="btn btn-wa" style="background:#1A1A1A;"><i class="fab fa-whatsapp"></i> 📱 Conversación rápida sobre este tema</a>
+          <a href="#verticalA" class="btn btn-outline" onclick="cerrarModal()">📧 Profundicemos institucionalmente</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Datos de los artículos completos (con inbound ya integrado en modal)
+    const articulos = {
+      1: {
+        titulo: "Etiquetado frontal: la transparencia como gesto político",
+        contenido: `<p>La Ley 27.642 de Promoción de la Alimentación Saludable marcó un antes y después en Argentina. Pero más allá de los octágonos negros, implica un cambio cultural: el derecho a saber qué comemos. En los talleres de COMENSAL recorremos etiquetas, analizamos estrategias de marketing y construimos criterios colectivos. Este artículo aborda cómo el etiquetado frontal se convierte en herramienta de soberanía alimentaria en las escuelas y cooperativas.</p>
+        <p>Desde "Comensales del Futuro" integramos la ley como eje transversal, promoviendo la autonomía y la mirada crítica de niñeces y docentes. El oficio de leer una etiqueta es un acto de memoria y resistencia.</p>`
+      },
+      2: {
+        titulo: "Memoria alimentaria: recetas de abuelas y soberanía",
+        contenido: `<p>Volver a las preparaciones ancestrales, recuperar sabores y oficios. La memoria alimentaria no es nostalgia, es una práctica política que nos conecta con el territorio. En "Hablemos de comer" exploramos estos vínculos, sin pesocentrismo, celebrando la diversidad de cuerpos y culturas.</p>
+        <p>El recetario heredado, las técnicas de conservación, el vínculo con la estacionalidad: todo eso construye una relación más humana con la comida. En este escrito compartimos experiencias de talleres y encuentros donde la memoria se vuelve plato.</p>`
+      }
+    };
+
+    function abrirModal(id) {
+      const modal = document.getElementById('modalArticulo');
+      const modalBody = document.getElementById('modalBody');
+      const art = articulos[id];
+      if (art) {
+        modalBody.innerHTML = `<h2 style="font-family: 'Playfair Display';">${art.titulo}</h2><hr>${art.contenido}`;
+      } else {
+        modalBody.innerHTML = `<p>Artículo de ejemplo sobre soberanía alimentaria.</p>`;
+      }
+      modal.style.display = 'flex';
+    }
+
+    function cerrarModal() {
+      document.getElementById('modalArticulo').style.display = 'none';
+    }
+
+    // Cerrar modal al hacer clic fuera del contenido
+    window.onclick = function(event) {
+      const modal = document.getElementById('modalArticulo');
+      if (event.target === modal) {
+        modal.style.display = 'none';
+      }
+    }
+
+    // Hamburguesa toggle
+    const hamburger = document.getElementById('hamburgerBtn');
+    const navLinks = document.getElementById('navLinks');
+    hamburger.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
+    });
+    // Cerrar menú al hacer click en un enlace
+    document.querySelectorAll('.nav-links a').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('active');
+      });
+    });
+
+    // Formulario institucional (simulación)
+    const formInstitucional = document.getElementById('emailFormInstitucional');
+    const statusDiv = document.getElementById('formStatus');
+    formInstitucional.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const nombre = document.getElementById('nombre').value.trim();
+      const rol = document.getElementById('rol').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const mensaje = document.getElementById('mensaje').value.trim();
+      if (!nombre || !rol || !email) {
+        statusDiv.innerHTML = '<div class="success-msg" style="background:#ffe0b5;">Por favor completá los campos obligatorios.</div>';
+        return;
+      }
+      // Simular envío
+      statusDiv.innerHTML = '<div class="success-msg">✅ Mensaje enviado (demo). Pronto nos comunicaremos desde COMENSAL.</div>';
+      formInstitucional.reset();
+      setTimeout(() => {
+        statusDiv.innerHTML = '';
+      }, 4000);
+    });
+
+    // Scroll suave para los botones de email que usan anclas
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        const targetId = this.getAttribute('href');
+        if (targetId === '#') return;
+        const target = document.querySelector(targetId);
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth' });
+          // si el menú móvil está abierto lo cerramos
+          navLinks.classList.remove('active');
+        }
+      });
+    });
+  </script>
+</body>
+</html>
